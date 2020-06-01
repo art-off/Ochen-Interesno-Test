@@ -10,14 +10,31 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    
     @IBOutlet weak var imageView: UIImageView!
+    
+    
+    // MARK: - Для Search Controller
+    private let searchController = UISearchController(searchResultsController: nil)
+    
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Поиск изображений"
         
-        ApiManager.downloadJsonImages(withSearchText: "ojo") { imagesResults in
+        setupSearchController()
+        
+        
+        ApiManager.downloadJsonImages(withSearchText: "mojong") { imagesResults in
             
             let base64 = imagesResults![5].thumbnail!
             
@@ -35,14 +52,30 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
                 self.imageView.image = image
             }
-            
-            
-            
         }
-
+    }
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Введите название изображения"
         
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        // чтобы строка поиска всегда отображался
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 
 
 }
 
+extension ViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        
+        print("searchd")
+    }
+    
+}
