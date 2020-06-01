@@ -34,24 +34,31 @@ extension ViewController: UITextFieldDelegate {
         guard let searchText = textField.text else { return false }
         guard !searchText.isEmpty else { return false }
         
+        showSpiner()
+        view.endEditing(true)
         
         ApiManager.downloadJsonImages(withSearchText: searchText) { imagesResults in
+            
+            print(imagesResults![5])
         
-            let base64 = imagesResults![5].thumbnail!
-        
-            let correctBase64 = String(base64.suffix(from: base64.index(base64.firstIndex(of: ",")!, offsetBy: 1)))
-        
-            let imageData = Data(base64Encoded: correctBase64)!
-            let image = UIImage(data: imageData)
-        
-            print(imagesResults![55])
+            if let thumbnail = imagesResults![5].thumbnail {
+                let base64 = thumbnail
+                
+                let correctBase64 = String(base64.suffix(from: base64.index(base64.firstIndex(of: ",")!, offsetBy: 1)))
+                
+                let imageData = Data(base64Encoded: correctBase64)!
+                let image = UIImage(data: imageData)
+                
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                }
+            }
             
             DispatchQueue.main.async {
-                self.imageView.image = image
+                self.removeSpiner()
             }
         }
         
-        view.endEditing(true)
         return true
     }
     
