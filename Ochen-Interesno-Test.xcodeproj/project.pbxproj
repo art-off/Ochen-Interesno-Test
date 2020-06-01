@@ -16,6 +16,7 @@
 		4AD696712483FCB200A4A2B7 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD696702483FCB200A4A2B7 /* API.swift */; };
 		4AD696732483FCC400A4A2B7 /* ImagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD696722483FCC400A4A2B7 /* ImagesResponse.swift */; };
 		4AD69675248424D100A4A2B7 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD69674248424D100A4A2B7 /* ApiManager.swift */; };
+		4AD696782485388A00A4A2B7 /* UIViewController+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD696772485388A00A4A2B7 /* UIViewController+hideKeyboard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		4AD696702483FCB200A4A2B7 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		4AD696722483FCC400A4A2B7 /* ImagesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesResponse.swift; sourceTree = "<group>"; };
 		4AD69674248424D100A4A2B7 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		4AD696772485388A00A4A2B7 /* UIViewController+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+hideKeyboard.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				4AD696562483F93A00A4A2B7 /* AppDelegate.swift */,
 				4AD696582483F93A00A4A2B7 /* SceneDelegate.swift */,
+				4AD696762485386C00A4A2B7 /* Extensions */,
 				4AD6965A2483F93A00A4A2B7 /* ViewController.swift */,
 				4AD6966F2483FC9700A4A2B7 /* Model */,
 				4AD6965C2483F93A00A4A2B7 /* Main.storyboard */,
@@ -82,6 +85,14 @@
 				4AD69674248424D100A4A2B7 /* ApiManager.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		4AD696762485386C00A4A2B7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4AD696772485388A00A4A2B7 /* UIViewController+hideKeyboard.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +168,7 @@
 			files = (
 				4AD6965B2483F93A00A4A2B7 /* ViewController.swift in Sources */,
 				4AD696732483FCC400A4A2B7 /* ImagesResponse.swift in Sources */,
+				4AD696782485388A00A4A2B7 /* UIViewController+hideKeyboard.swift in Sources */,
 				4AD696572483F93A00A4A2B7 /* AppDelegate.swift in Sources */,
 				4AD696712483FCB200A4A2B7 /* API.swift in Sources */,
 				4AD69675248424D100A4A2B7 /* ApiManager.swift in Sources */,
