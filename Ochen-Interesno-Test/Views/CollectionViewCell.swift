@@ -17,7 +17,6 @@ class CollectionViewCell: UICollectionViewCell {
     
     
     func setImage() {
-        
         // Если миниизображение есть (base64 или ссылка)
         if let thumbmail = imageInfo.thumbnail {
             
@@ -28,7 +27,7 @@ class CollectionViewCell: UICollectionViewCell {
                 imageView.image = imageFromBase64
             // Если в thumbmail не было base64 - пытаемся скачать по ссылке, которая лежит там
             } else {
-                ApiManager.loadImage(urlString: thumbmail) { image in
+                ImagesManager.shared.loadImage(urlString: thumbmail) { image in
                     DispatchQueue.main.async {
                         self.imageView.image = image
                     }
@@ -36,13 +35,12 @@ class CollectionViewCell: UICollectionViewCell {
             }
         // Если соовсем нет thumbmail - загружаем в качетсве мини-изображения original
         } else {
-            ApiManager.loadImage(urlString: imageInfo.original) { image in
+            ImagesManager.shared.loadImage(urlString: imageInfo.original) { image in
                 DispatchQueue.main.async {
                     self.imageView.image = image
                 }
             }
         }
-        
     }
     
 }

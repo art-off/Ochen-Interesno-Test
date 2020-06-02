@@ -49,6 +49,7 @@ extension ViewController: UITextFieldDelegate {
         guard let searchText = textField.text else { return false }
         guard !searchText.isEmpty else { return false }
         
+        textField.textAlignment = .center
         showSpiner()
         view.endEditing(true)
         
@@ -70,6 +71,11 @@ extension ViewController: UITextFieldDelegate {
             }
         }
         
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.textAlignment = .left
         return true
     }
     

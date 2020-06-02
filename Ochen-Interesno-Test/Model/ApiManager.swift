@@ -42,7 +42,6 @@ class ApiManager {
     }
     
     static func loadImage(urlString: String, complition: @escaping (UIImage?) -> Void) {
-        
         guard let url = URL(string: urlString) else {
             complition(nil)
             return

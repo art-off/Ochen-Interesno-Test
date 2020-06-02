@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="t7Y-zJ-WFt">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="S5h-IV-IIo">
                                     <size key="itemSize" width="200" height="200"/>
@@ -34,7 +34,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Hb-Ia-Bfm">
-                                                    <rect key="frame" x="0.0" y="8" width="131" height="122"/>
+                                                    <rect key="frame" x="0.0" y="8" width="200" height="192"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -63,10 +63,10 @@
                             <constraint firstItem="t7Y-zJ-WFt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5Ix-RA-iWj"/>
                             <constraint firstItem="t7Y-zJ-WFt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="6GK-Fy-uMm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qka-Uz-Cti" secondAttribute="trailing" constant="12" id="JLp-E4-OQs"/>
+                            <constraint firstAttribute="bottom" secondItem="t7Y-zJ-WFt" secondAttribute="bottom" id="gdi-hY-6B8"/>
                             <constraint firstItem="t7Y-zJ-WFt" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="rIl-Lf-TYt"/>
                             <constraint firstItem="qka-Uz-Cti" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="uCc-A5-Hg0"/>
                             <constraint firstItem="qka-Uz-Cti" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="wQO-z5-7b2"/>
-                            <constraint firstItem="t7Y-zJ-WFt" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="y3v-W1-Hy2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
