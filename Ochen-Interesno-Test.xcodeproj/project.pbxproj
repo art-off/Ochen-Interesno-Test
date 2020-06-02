@@ -18,6 +18,7 @@
 		4AD69675248424D100A4A2B7 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD69674248424D100A4A2B7 /* ApiManager.swift */; };
 		4AD696782485388A00A4A2B7 /* UIViewController+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD696772485388A00A4A2B7 /* UIViewController+hideKeyboard.swift */; };
 		4AD6967A248540C000A4A2B7 /* UIViewController+spiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD69679248540C000A4A2B7 /* UIViewController+spiner.swift */; };
+		4AD6967D2485556600A4A2B7 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6967C2485556600A4A2B7 /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		4AD69674248424D100A4A2B7 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		4AD696772485388A00A4A2B7 /* UIViewController+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+hideKeyboard.swift"; sourceTree = "<group>"; };
 		4AD69679248540C000A4A2B7 /* UIViewController+spiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+spiner.swift"; sourceTree = "<group>"; };
+		4AD6967C2485556600A4A2B7 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				4AD696582483F93A00A4A2B7 /* SceneDelegate.swift */,
 				4AD696762485386C00A4A2B7 /* Extensions */,
 				4AD6965A2483F93A00A4A2B7 /* ViewController.swift */,
+				4AD6967B2485554F00A4A2B7 /* Views */,
 				4AD6966F2483FC9700A4A2B7 /* Model */,
 				4AD6965C2483F93A00A4A2B7 /* Main.storyboard */,
 				4AD6965F2483F93D00A4A2B7 /* Assets.xcassets */,
@@ -96,6 +99,14 @@
 				4AD69679248540C000A4A2B7 /* UIViewController+spiner.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4AD6967B2485554F00A4A2B7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4AD6967C2485556600A4A2B7 /* CollectionViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +182,7 @@
 			files = (
 				4AD6965B2483F93A00A4A2B7 /* ViewController.swift in Sources */,
 				4AD6967A248540C000A4A2B7 /* UIViewController+spiner.swift in Sources */,
+				4AD6967D2485556600A4A2B7 /* CollectionViewCell.swift in Sources */,
 				4AD696732483FCC400A4A2B7 /* ImagesResponse.swift in Sources */,
 				4AD696782485388A00A4A2B7 /* UIViewController+hideKeyboard.swift in Sources */,
 				4AD696572483F93A00A4A2B7 /* AppDelegate.swift in Sources */,
