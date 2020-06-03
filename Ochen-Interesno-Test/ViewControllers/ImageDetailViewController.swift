@@ -39,23 +39,37 @@ class ImageDetailViewController: UIViewController {
     private func setImage() {
         navigationItem.title = imageInfo.title
         
-        // Если есть оригинал - качаем из него
+        // Пытаемся установить из Original,
+        // Если что-то пойдет не так - оттуда вызовется setImageFromThumbnail
+        setImageFromOriginal()
+    }
+    
+    private func setImageFromOriginal() {
+        print("original")
         if let original = imageInfo.original {
-            print("original")
+            print("original = \(original)")
             task = ImagesManager.shared.loadImage(urlString: original) { image in
-                print("original - \(image)")
-                DispatchQueue.main.async {
-                    self.imageView.image = image
+                if let image = image {
+                    DispatchQueue.main.async {
+                        self.imageView.image = image
+                    }
+                } else {
+                    // Если что-то пошло не так с оригиналом - устанавливаем хотя бы thumbnail
+                    self.setImageFromThumbnail()
                 }
             }
             task?.resume()
-        // Если есть хотя бы thumbnail - качаем из него
-        } else if let thumbnail = imageInfo.thumbnail {
-            print("thumbnail")
+        }
+    }
+    
+    private func setImageFromThumbnail() {
+        print("thumbnail")
+        if let thumbnail = imageInfo.thumbnail {
             // Если в thumbnail был base64, то устанавливаем image
             if let imageFromBase64 = UIImage.fromBase64(base64: thumbnail) {
-                print("thumbnail base64 - \(imageFromBase64)")
-                imageView.image = imageFromBase64
+                DispatchQueue.main.async {
+                    self.imageView.image = imageFromBase64
+                }
             // Если в thumbnail не было base64 - пытаемся скачать по ссылке, которая лежит там
             } else {
                 task = ImagesManager.shared.loadImage(urlString: thumbnail) { image in
@@ -79,7 +93,6 @@ class ImageDetailViewController: UIViewController {
     }
     
     // MARK: - Actions
-    
     @IBAction func showPreviousImage(_ sender: UIBarButtonItem) {
         print("prev")
         let previousImage = delegate?.previousImage(from: currIndex)
@@ -89,6 +102,7 @@ class ImageDetailViewController: UIViewController {
             task?.cancel()
             currIndex = previousImage.index
             imageInfo = previousImage.info
+            imageView.image = nil
             setImage()
         } else {
             print("Нету больше")
