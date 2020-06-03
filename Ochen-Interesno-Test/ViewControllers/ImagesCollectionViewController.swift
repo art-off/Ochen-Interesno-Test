@@ -54,7 +54,7 @@ extension ImagesCollectionViewController: UITextFieldDelegate {
         showSpiner()
         view.endEditing(true)
         
-        ApiManager.loadJsonImages(withSearchText: searchText) { imagesResults in
+        let task = ApiManager.loadJsonImagesTask(withSearchText: searchText) { imagesResults in
             guard let imagesResults = imagesResults else {
                 print("Нету(")
                 DispatchQueue.main.async {
@@ -70,6 +70,7 @@ extension ImagesCollectionViewController: UITextFieldDelegate {
                 self.collectionView.reloadData()
             }
         }
+        task?.resume()
         
         return true
     }

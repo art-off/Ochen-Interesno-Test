@@ -18,6 +18,8 @@ class ImageDetailViewController: UIViewController {
     var imageInfo: ImageResult!
     var currIndex: Int!
     
+    private var task: URLSessionDataTask?
+    
     // MARK: - Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +42,13 @@ class ImageDetailViewController: UIViewController {
         // Если есть оригинал - качаем из него
         if let original = imageInfo.original {
             print("original")
-            ImagesManager.shared.loadImage(urlString: original) { image in
+            task = ImagesManager.shared.loadImage(urlString: original) { image in
                 print("original - \(image)")
                 DispatchQueue.main.async {
                     self.imageView.image = image
                 }
             }
+            task?.resume()
         // Если есть хотя бы thumbnail - качаем из него
         } else if let thumbnail = imageInfo.thumbnail {
             print("thumbnail")
@@ -55,11 +58,12 @@ class ImageDetailViewController: UIViewController {
                 imageView.image = imageFromBase64
             // Если в thumbnail не было base64 - пытаемся скачать по ссылке, которая лежит там
             } else {
-                ImagesManager.shared.loadImage(urlString: thumbnail) { image in
+                task = ImagesManager.shared.loadImage(urlString: thumbnail) { image in
                     DispatchQueue.main.async {
                         self.imageView.image = image
                     }
                 }
+                task?.resume()
             }
         }
     }
@@ -81,6 +85,8 @@ class ImageDetailViewController: UIViewController {
         let previousImage = delegate?.previousImage(from: currIndex)
         
         if let previousImage = previousImage {
+            // прекращаем скачивание прошлой картинки
+            task?.cancel()
             currIndex = previousImage.index
             imageInfo = previousImage.info
             setImage()
@@ -94,6 +100,8 @@ class ImageDetailViewController: UIViewController {
         let nextImage = delegate?.nextImage(from: currIndex)
         
         if let nextImage = nextImage {
+            // прекращаем скачивание прошлой картинки
+            task?.cancel()
             currIndex = nextImage.index
             imageInfo = nextImage.info
             imageView.image = nil

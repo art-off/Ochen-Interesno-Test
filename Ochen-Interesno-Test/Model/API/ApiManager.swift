@@ -10,8 +10,11 @@ import UIKit
 
 class ApiManager {
     
-    static func loadJsonImages(withSearchText searchText: String, complition: @escaping ([ImageResult]?) -> Void) {
-        var components = URLComponents(string: API.addres)!
+    static func loadJsonImagesTask(withSearchText searchText: String, complition: @escaping ([ImageResult]?) -> Void) -> URLSessionDataTask? {
+        guard var components = URLComponents(string: API.addres) else {
+            complition(nil)
+            return nil
+        }
         components.queryItems = [
             URLQueryItem(name: "q", value: searchText),
             URLQueryItem(name: "tbm", value: "isch"),
@@ -20,7 +23,7 @@ class ApiManager {
             URLQueryItem(name: "api_key", value: API.key)
         ]
         
-        URLSession.shared.dataTask(with: components.url!) { data, response, error in
+        let task = URLSession.shared.dataTask(with: components.url!) { data, response, error in
             guard let httpResponse = response as? HTTPURLResponse,
                 (200..<300).contains(httpResponse.statusCode) else {
                     complition(nil)
@@ -39,16 +42,18 @@ class ApiManager {
                 print(jsonError)
                 complition(nil)
             }
-        }.resume()
-    }
-    
-    static func loadImage(urlString: String, complition: @escaping (UIImage?) -> Void) {
-        guard let url = URL(string: urlString) else {
-            complition(nil)
-            return
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        return task
+    }
+    
+    static func loadImageTask(urlString: String, complition: @escaping (UIImage?) -> Void) -> URLSessionDataTask? {
+        guard let url = URL(string: urlString) else {
+            complition(nil)
+            return nil
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let httpResponse = response as? HTTPURLResponse,
                 (200...300).contains(httpResponse.statusCode) else {
                     complition(nil)
@@ -63,7 +68,9 @@ class ApiManager {
             let image = UIImage(data: data)
             
             complition(image)
-        }.resume()
+        }
+        
+        return task
     }
     
 }

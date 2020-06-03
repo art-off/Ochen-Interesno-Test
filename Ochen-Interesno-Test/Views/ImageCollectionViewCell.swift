@@ -15,6 +15,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     var imageInfo: ImageResult!
     
+    private var task: URLSessionDataTask!
+    
     
     // MARK: - Methods
     func setImage() {
@@ -25,19 +27,21 @@ class ImageCollectionViewCell: UICollectionViewCell {
                 imageView.image = imageFromBase64
             // Если в thumbmail не было base64 - пытаемся скачать по ссылке, которая лежит там
             } else {
-                ImagesManager.shared.loadImage(urlString: thumbnail) { image in
+                task = ImagesManager.shared.loadImage(urlString: thumbnail) { image in
                     DispatchQueue.main.async {
                         self.imageView.image = image
                     }
                 }
+                task?.resume()
             }
         // Если соовсем нет thumbmail - загружаем в качетсве мини-изображения original
         } else if let original = imageInfo.original {
-            ImagesManager.shared.loadImage(urlString: original) { image in
+            task = ImagesManager.shared.loadImage(urlString: original) { image in
                 DispatchQueue.main.async {
                     self.imageView.image = image
                 }
             }
+            task?.resume()
         }
     }
     

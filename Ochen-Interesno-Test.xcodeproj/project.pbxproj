@@ -72,6 +72,7 @@
 		4A72E0452486C38D00F0A59C /* API */ = {
 			isa = PBXGroup;
 			children = (
+				4A72E05B2487C73E00F0A59C /* Extensions */,
 				4AD696702483FCB200A4A2B7 /* API.swift */,
 				4AD69674248424D100A4A2B7 /* ApiManager.swift */,
 			);
@@ -96,6 +97,13 @@
 				4A72E0592487C41100F0A59C /* ImageDetailViewDelegate.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4A72E05B2487C73E00F0A59C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		4AD6964A2483F93A00A4A2B7 = {

@@ -14,15 +14,16 @@ class ImagesManager {
     
     var imageCache = NSCache<NSString, UIImage>()
     
-    func loadImage(urlString: String, complition: @escaping (UIImage?) -> Void) {
+    
+    func loadImage(urlString: String, complition: @escaping (UIImage?) -> Void) -> URLSessionDataTask? {
         // Если изображение есть в кэш - возвращаем его
         if let imageFromCache = imageCache.object(forKey: urlString as NSString) {
             complition(imageFromCache)
-            return
+            return nil
         }
         
         // Если нет - качаем и записываем в кэш
-        ApiManager.loadImage(urlString: urlString) { image in
+        let task = ApiManager.loadImageTask(urlString: urlString) { image in
             guard let image = image else {
                 complition(nil)
                 return
@@ -32,6 +33,12 @@ class ImagesManager {
             complition(image)
         }
         
+        if let task = task {
+            return task
+        } else {
+            complition(nil)
+            return nil
+        }
     }
     
 }
