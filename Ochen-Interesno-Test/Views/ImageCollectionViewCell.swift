@@ -1,5 +1,5 @@
 //
-//  CollectionViewCell.swift
+//  ImageCollectionViewCell.swift
 //  Ochen-Interesno-Test
 //
 //  Created by art-off on 01.06.2020.
@@ -8,34 +8,32 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+class ImageCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var imageView: UIImageView!
     
     // MARK: - Properties
     var imageInfo: ImageResult!
     
-    @IBOutlet weak var imageView: UIImageView!
     
-    
+    // MARK: - Methods
     func setImage() {
         // Если миниизображение есть (base64 или ссылка)
-        if let thumbmail = imageInfo.thumbnail {
-            
-            let imageFromBase64 = UIImage.fromBase64(base64: thumbmail)
-            
+        if let thumbnail = imageInfo.thumbnail {
             // Если в thumbmail был base64, то устанавливаем image
-            if let imageFromBase64 = imageFromBase64 {
+            if let imageFromBase64 = UIImage.fromBase64(base64: thumbnail) {
                 imageView.image = imageFromBase64
             // Если в thumbmail не было base64 - пытаемся скачать по ссылке, которая лежит там
             } else {
-                ImagesManager.shared.loadImage(urlString: thumbmail) { image in
+                ImagesManager.shared.loadImage(urlString: thumbnail) { image in
                     DispatchQueue.main.async {
                         self.imageView.image = image
                     }
                 }
             }
         // Если соовсем нет thumbmail - загружаем в качетсве мини-изображения original
-        } else {
-            ImagesManager.shared.loadImage(urlString: imageInfo.original) { image in
+        } else if let original = imageInfo.original {
+            ImagesManager.shared.loadImage(urlString: original) { image in
                 DispatchQueue.main.async {
                     self.imageView.image = image
                 }

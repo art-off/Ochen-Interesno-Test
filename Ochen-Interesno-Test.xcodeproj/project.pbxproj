@@ -9,9 +9,13 @@
 /* Begin PBXBuildFile section */
 		4A72E03F248672A100F0A59C /* UIImage+base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A72E03E248672A100F0A59C /* UIImage+base64.swift */; };
 		4A72E0442486BBDD00F0A59C /* ImagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A72E0432486BBDD00F0A59C /* ImagesManager.swift */; };
+		4A72E0512487787000F0A59C /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A72E04F2487787000F0A59C /* ImageDetailViewController.swift */; };
+		4A72E0522487787000F0A59C /* ImageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A72E0502487787000F0A59C /* ImageDetailViewController.xib */; };
+		4A72E0572487897900F0A59C /* ImagesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A72E0562487897900F0A59C /* ImagesHelper.swift */; };
+		4A72E05A2487C41100F0A59C /* ImageDetailViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A72E0592487C41100F0A59C /* ImageDetailViewDelegate.swift */; };
 		4AD696572483F93A00A4A2B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD696562483F93A00A4A2B7 /* AppDelegate.swift */; };
 		4AD696592483F93A00A4A2B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD696582483F93A00A4A2B7 /* SceneDelegate.swift */; };
-		4AD6965B2483F93A00A4A2B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6965A2483F93A00A4A2B7 /* ViewController.swift */; };
+		4AD6965B2483F93A00A4A2B7 /* ImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6965A2483F93A00A4A2B7 /* ImagesCollectionViewController.swift */; };
 		4AD6965E2483F93A00A4A2B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AD6965C2483F93A00A4A2B7 /* Main.storyboard */; };
 		4AD696602483F93D00A4A2B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AD6965F2483F93D00A4A2B7 /* Assets.xcassets */; };
 		4AD696632483F93D00A4A2B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AD696612483F93D00A4A2B7 /* LaunchScreen.storyboard */; };
@@ -20,16 +24,20 @@
 		4AD69675248424D100A4A2B7 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD69674248424D100A4A2B7 /* ApiManager.swift */; };
 		4AD696782485388A00A4A2B7 /* UIViewController+hideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD696772485388A00A4A2B7 /* UIViewController+hideKeyboard.swift */; };
 		4AD6967A248540C000A4A2B7 /* UIViewController+spiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD69679248540C000A4A2B7 /* UIViewController+spiner.swift */; };
-		4AD6967D2485556600A4A2B7 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6967C2485556600A4A2B7 /* CollectionViewCell.swift */; };
+		4AD6967D2485556600A4A2B7 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD6967C2485556600A4A2B7 /* ImageCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4A72E03E248672A100F0A59C /* UIImage+base64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+base64.swift"; sourceTree = "<group>"; };
 		4A72E0432486BBDD00F0A59C /* ImagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesManager.swift; sourceTree = "<group>"; };
+		4A72E04F2487787000F0A59C /* ImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
+		4A72E0502487787000F0A59C /* ImageDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageDetailViewController.xib; sourceTree = "<group>"; };
+		4A72E0562487897900F0A59C /* ImagesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesHelper.swift; sourceTree = "<group>"; };
+		4A72E0592487C41100F0A59C /* ImageDetailViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewDelegate.swift; sourceTree = "<group>"; };
 		4AD696532483F93A00A4A2B7 /* Ochen-Interesno-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ochen-Interesno-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AD696562483F93A00A4A2B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AD696582483F93A00A4A2B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4AD6965A2483F93A00A4A2B7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4AD6965A2483F93A00A4A2B7 /* ImagesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewController.swift; sourceTree = "<group>"; };
 		4AD6965D2483F93A00A4A2B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4AD6965F2483F93D00A4A2B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AD696622483F93D00A4A2B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -39,7 +47,7 @@
 		4AD69674248424D100A4A2B7 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		4AD696772485388A00A4A2B7 /* UIViewController+hideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+hideKeyboard.swift"; sourceTree = "<group>"; };
 		4AD69679248540C000A4A2B7 /* UIViewController+spiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+spiner.swift"; sourceTree = "<group>"; };
-		4AD6967C2485556600A4A2B7 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		4AD6967C2485556600A4A2B7 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +67,35 @@
 				4A72E03E248672A100F0A59C /* UIImage+base64.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4A72E0452486C38D00F0A59C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				4AD696702483FCB200A4A2B7 /* API.swift */,
+				4AD69674248424D100A4A2B7 /* ApiManager.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		4A72E04E2487780100F0A59C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4A72E0582487C3FC00F0A59C /* Protocols */,
+				4AD696762485386C00A4A2B7 /* Extensions */,
+				4AD6965A2483F93A00A4A2B7 /* ImagesCollectionViewController.swift */,
+				4A72E04F2487787000F0A59C /* ImageDetailViewController.swift */,
+				4A72E0502487787000F0A59C /* ImageDetailViewController.xib */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4A72E0582487C3FC00F0A59C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				4A72E0592487C41100F0A59C /* ImageDetailViewDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		4AD6964A2483F93A00A4A2B7 = {
@@ -82,8 +119,7 @@
 			children = (
 				4AD696562483F93A00A4A2B7 /* AppDelegate.swift */,
 				4AD696582483F93A00A4A2B7 /* SceneDelegate.swift */,
-				4AD696762485386C00A4A2B7 /* Extensions */,
-				4AD6965A2483F93A00A4A2B7 /* ViewController.swift */,
+				4A72E04E2487780100F0A59C /* ViewControllers */,
 				4AD6967B2485554F00A4A2B7 /* Views */,
 				4AD6966F2483FC9700A4A2B7 /* Model */,
 				4AD6965C2483F93A00A4A2B7 /* Main.storyboard */,
@@ -97,9 +133,9 @@
 		4AD6966F2483FC9700A4A2B7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4A72E0452486C38D00F0A59C /* API */,
 				4AD696722483FCC400A4A2B7 /* ImagesResponse.swift */,
-				4AD696702483FCB200A4A2B7 /* API.swift */,
-				4AD69674248424D100A4A2B7 /* ApiManager.swift */,
+				4A72E0562487897900F0A59C /* ImagesHelper.swift */,
 				4A72E0432486BBDD00F0A59C /* ImagesManager.swift */,
 			);
 			path = Model;
@@ -118,7 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				4A72E040248672AF00F0A59C /* Extensions */,
-				4AD6967C2485556600A4A2B7 /* CollectionViewCell.swift */,
+				4AD6967C2485556600A4A2B7 /* ImageCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -184,6 +220,7 @@
 				4AD696632483F93D00A4A2B7 /* LaunchScreen.storyboard in Resources */,
 				4AD696602483F93D00A4A2B7 /* Assets.xcassets in Resources */,
 				4AD6965E2483F93A00A4A2B7 /* Main.storyboard in Resources */,
+				4A72E0522487787000F0A59C /* ImageDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,14 +232,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A72E03F248672A100F0A59C /* UIImage+base64.swift in Sources */,
-				4AD6965B2483F93A00A4A2B7 /* ViewController.swift in Sources */,
+				4AD6965B2483F93A00A4A2B7 /* ImagesCollectionViewController.swift in Sources */,
 				4AD6967A248540C000A4A2B7 /* UIViewController+spiner.swift in Sources */,
-				4AD6967D2485556600A4A2B7 /* CollectionViewCell.swift in Sources */,
+				4AD6967D2485556600A4A2B7 /* ImageCollectionViewCell.swift in Sources */,
 				4AD696732483FCC400A4A2B7 /* ImagesResponse.swift in Sources */,
 				4AD696782485388A00A4A2B7 /* UIViewController+hideKeyboard.swift in Sources */,
 				4AD696572483F93A00A4A2B7 /* AppDelegate.swift in Sources */,
+				4A72E0512487787000F0A59C /* ImageDetailViewController.swift in Sources */,
+				4A72E05A2487C41100F0A59C /* ImageDetailViewDelegate.swift in Sources */,
 				4AD696712483FCB200A4A2B7 /* API.swift in Sources */,
 				4AD69675248424D100A4A2B7 /* ApiManager.swift in Sources */,
+				4A72E0572487897900F0A59C /* ImagesHelper.swift in Sources */,
 				4A72E0442486BBDD00F0A59C /* ImagesManager.swift in Sources */,
 				4AD696592483F93A00A4A2B7 /* SceneDelegate.swift in Sources */,
 			);

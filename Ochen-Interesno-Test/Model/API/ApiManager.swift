@@ -35,7 +35,8 @@ class ApiManager {
             do {
                 let imagesResponse = try JSONDecoder().decode(ImagesResponse.self, from: data)
                 complition(imagesResponse.imagesResults)
-            } catch {
+            } catch let jsonError {
+                print(jsonError)
                 complition(nil)
             }
         }.resume()

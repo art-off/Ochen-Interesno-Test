@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImageDetailViewController" customModule="Ochen_Interesno_Test" customModuleProvider="target">
+            <connections>
+                <outlet property="imageView" destination="M90-5k-qMx" id="8OQ-dJ-0xD"/>
+                <outlet property="toolBar" destination="K8K-4L-4BW" id="TtD-kk-MbI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M90-5k-qMx">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </imageView>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="K8K-4L-4BW">
+                    <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                    <items>
+                        <barButtonItem title="Item" image="previous" id="Myu-wG-w4U" userLabel="Previous">
+                            <connections>
+                                <action selector="showPreviousImage:" destination="-1" id="kTN-Jv-TVv"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="cyk-3I-VQe"/>
+                        <barButtonItem title="Показать источник" id="67l-fx-SX6">
+                            <connections>
+                                <action selector="openLink:" destination="-1" id="H56-AC-hEP"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="bQK-p1-461"/>
+                        <barButtonItem image="next" id="e44-Cx-9BB" userLabel="Next">
+                            <connections>
+                                <action selector="showNextImage:" destination="-1" id="rLr-BG-Wjb"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="K8K-4L-4BW" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="0IR-cc-o3g"/>
+                <constraint firstItem="K8K-4L-4BW" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="1gN-XI-KGb"/>
+                <constraint firstItem="M90-5k-qMx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="BLK-Ux-nxz"/>
+                <constraint firstItem="M90-5k-qMx" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="eYW-5s-R5Y"/>
+                <constraint firstItem="M90-5k-qMx" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="m33-s4-xDx"/>
+                <constraint firstItem="M90-5k-qMx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mwZ-2c-3Z0"/>
+                <constraint firstItem="K8K-4L-4BW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pdq-23-XI8"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="137.68115942028987" y="100.44642857142857"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="next" width="36" height="36"/>
+        <image name="previous" width="36" height="36"/>
+    </resources>
+</document>
