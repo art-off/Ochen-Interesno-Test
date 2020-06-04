@@ -35,8 +35,10 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Hb-Ia-Bfm">
                                                     <rect key="frame" x="0.0" y="8" width="131" height="122"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="7Hb-Ia-Bfm" secondAttribute="trailing" id="7aU-az-VsU"/>
                                                 <constraint firstItem="7Hb-Ia-Bfm" firstAttribute="leading" secondItem="abY-lz-V1W" secondAttribute="leading" id="8cW-8m-yD2"/>
@@ -44,6 +46,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="7Hb-Ia-Bfm" secondAttribute="bottom" id="mxh-CA-8cp"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="131" height="130"/>
                                         <connections>
                                             <outlet property="imageView" destination="7Hb-Ia-Bfm" id="jAJ-Kx-b0B"/>

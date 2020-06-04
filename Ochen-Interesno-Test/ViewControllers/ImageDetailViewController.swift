@@ -94,7 +94,6 @@ class ImageDetailViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func showPreviousImage(_ sender: UIBarButtonItem) {
-        print("prev")
         let previousImage = delegate?.previousImage(from: currIndex)
         
         if let previousImage = previousImage {
@@ -110,7 +109,6 @@ class ImageDetailViewController: UIViewController {
     }
     
     @IBAction func showNextImage(_ sender: UIBarButtonItem) {
-        print("next")
         let nextImage = delegate?.nextImage(from: currIndex)
         
         if let nextImage = nextImage {
@@ -126,5 +124,9 @@ class ImageDetailViewController: UIViewController {
     }
     
     @IBAction func openLink(_ sender: UIBarButtonItem) {
+        let webViewController = WebViewController()
+        webViewController.link = imageInfo.link
+        //present(webViewController, animated: true, completion: nil)
+        navigationController?.pushViewController(webViewController, animated: true)
     }
 }
