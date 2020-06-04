@@ -92,8 +92,9 @@ extension ImagesCollectionViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImageCollectionViewCell
-        // чтобы фото не повторялись (не вышло)
+        // чтобы фото не повторялись
         cell.imageView.image = nil
+        cell.cancelTask()
         cell.imageInfo = imagesResults[indexPath.row]
         cell.setImage()
         return cell

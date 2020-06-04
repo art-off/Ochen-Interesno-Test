@@ -45,4 +45,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func cancelTask() {
+        task?.cancel()
+    }
+    
 }

@@ -45,41 +45,62 @@ class ImageDetailViewController: UIViewController {
     }
     
     private func setImageFromOriginal() {
+        // Прекращаем прошлое скачивание
+        task?.cancel()
+        
         print("original")
-        if let original = imageInfo.original {
-            print("original = \(original)")
-            task = ImagesManager.shared.loadImage(urlString: original) { image in
-                if let image = image {
-                    DispatchQueue.main.async {
-                        self.imageView.image = image
-                    }
-                } else {
-                    // Если что-то пошло не так с оригиналом - устанавливаем хотя бы thumbnail
-                    self.setImageFromThumbnail()
-                }
-            }
-            task?.resume()
+        // Если ссылки на оригинал нет - устанавливаем из thumbnail
+        guard let original = imageInfo.original else {
+            print("нет original")
+            setImageFromThumbnail()
+            return
         }
+        
+        // Если есть в кэше - устанавливаем оттуда
+        if let originalFromCache = ImagesManager.shared.getCachedImage(urlString: original) {
+            print("originalFromCache")
+            self.imageView.image = originalFromCache
+            return
+        }
+        
+        task = ImagesManager.shared.loadImage(urlString: original) { image in
+            if let image = image {
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                }
+            } else {
+                self.setImageFromThumbnail()
+            }
+        }
+        task?.resume()
     }
     
     private func setImageFromThumbnail() {
+        // Прекращаем прошлое скачивание
+        task?.cancel()
+        
         print("thumbnail")
-        if let thumbnail = imageInfo.thumbnail {
-            // Если в thumbnail был base64, то устанавливаем image
-            if let imageFromBase64 = UIImage.fromBase64(base64: thumbnail) {
+        guard let thumbnail = imageInfo.thumbnail else {
+            print("нет thumbnail")
+            return
+        }
+        
+        if let thumbnailFromCache = ImagesManager.shared.getCachedImage(urlString: thumbnail) {
+            print("thumbnailFromCache")
+            DispatchQueue.main.async {
+                self.imageView.image = thumbnailFromCache
+            }
+            return
+        }
+        
+        task = ImagesManager.shared.loadImage(urlString: thumbnail) { image in
+            if let image = image {
                 DispatchQueue.main.async {
-                    self.imageView.image = imageFromBase64
+                    self.imageView.image = image
                 }
-            // Если в thumbnail не было base64 - пытаемся скачать по ссылке, которая лежит там
-            } else {
-                task = ImagesManager.shared.loadImage(urlString: thumbnail) { image in
-                    DispatchQueue.main.async {
-                        self.imageView.image = image
-                    }
-                }
-                task?.resume()
             }
         }
+        task?.resume()
     }
     
     // MARK: - Add Gesture Recognizer
@@ -97,8 +118,6 @@ class ImageDetailViewController: UIViewController {
         let previousImage = delegate?.previousImage(from: currIndex)
         
         if let previousImage = previousImage {
-            // прекращаем скачивание прошлой картинки
-            task?.cancel()
             currIndex = previousImage.index
             imageInfo = previousImage.info
             imageView.image = nil
@@ -112,8 +131,6 @@ class ImageDetailViewController: UIViewController {
         let nextImage = delegate?.nextImage(from: currIndex)
         
         if let nextImage = nextImage {
-            // прекращаем скачивание прошлой картинки
-            task?.cancel()
             currIndex = nextImage.index
             imageInfo = nextImage.info
             imageView.image = nil
@@ -126,7 +143,6 @@ class ImageDetailViewController: UIViewController {
     @IBAction func openLink(_ sender: UIBarButtonItem) {
         let webViewController = WebViewController()
         webViewController.link = imageInfo.link
-        //present(webViewController, animated: true, completion: nil)
         navigationController?.pushViewController(webViewController, animated: true)
     }
 }
