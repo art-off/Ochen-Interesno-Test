@@ -42,10 +42,10 @@ class ImageDetailViewController: UIViewController {
         if !view.subviews.contains(viewWithLabel) {
             view.addSubview(viewWithLabel)
             viewWithLabel.translatesAutoresizingMaskIntoConstraints = false
-            viewWithLabel.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
-            viewWithLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
-            viewWithLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
-            viewWithLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -2 * 8).isActive = true
+            viewWithLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            viewWithLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            viewWithLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            viewWithLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -6 * 8).isActive = true
         }
         
         viewWithLabel.label.text = "Что-то пошло не так"

@@ -37,6 +37,11 @@ class WebViewController: UIViewController {
         addToolbar()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        // Убираем toolbar, потому что он не юзатся нигде больше
+        navigationController?.isToolbarHidden = true
+    }
+    
     // MARK: - Toolbar
     private func addToolbar() {
         let reloadButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
