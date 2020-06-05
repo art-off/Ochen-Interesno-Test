@@ -23,8 +23,8 @@ struct ImageResult: Codable {
     let position: Int
     let thumbnail: String?
     let original: String?
-    let source: String
-    let title: String
-    let link: String
+    let source: String?
+    let title: String?
+    let link: String?
     
 }
