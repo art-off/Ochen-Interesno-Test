@@ -34,10 +34,6 @@ class ImagesCollectionViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-        // закрытие клавиатуры по нажатию вне ее
-        // ЭТОТ ЖЕСТ МЕШАЕТ ДЛЯ РАСПОЗНОВАНИЯ ТАПОВ ПО ЯЧЕЙКАМ
-        //addTapGestureToHideKeyboard()
     }
     
 }

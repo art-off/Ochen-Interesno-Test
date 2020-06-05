@@ -28,19 +28,19 @@
                     <items>
                         <barButtonItem title="Item" image="previous" id="Myu-wG-w4U" userLabel="Previous">
                             <connections>
-                                <action selector="showPreviousImage:" destination="-1" id="kTN-Jv-TVv"/>
+                                <action selector="showPreviousImageTapped:" destination="-1" id="mX2-LZ-ph5"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="cyk-3I-VQe"/>
                         <barButtonItem title="Показать источник" id="67l-fx-SX6">
                             <connections>
-                                <action selector="openLink:" destination="-1" id="H56-AC-hEP"/>
+                                <action selector="openLinkTapped:" destination="-1" id="Cam-bS-2WX"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="bQK-p1-461"/>
-                        <barButtonItem image="next" id="e44-Cx-9BB" userLabel="Next">
+                        <barButtonItem title="Item" image="next" id="e44-Cx-9BB" userLabel="Next">
                             <connections>
-                                <action selector="showNextImage:" destination="-1" id="rLr-BG-Wjb"/>
+                                <action selector="showNextImageTapped:" destination="-1" id="Wgm-Tq-CSe"/>
                             </connections>
                         </barButtonItem>
                     </items>

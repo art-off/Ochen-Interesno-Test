@@ -25,6 +25,7 @@ class ImageDetailViewController: UIViewController {
         super.viewDidLoad()
 
         addTapGestureToToggleHideToolBar()
+        addSwipeGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,7 +36,7 @@ class ImageDetailViewController: UIViewController {
         navigationController?.setToolbarHidden(true, animated: true)
     }
     
-    // MARK: - Methods
+    // MARK: - Set Image
     private func setImage() {
         navigationItem.title = imageInfo.title
         
@@ -45,9 +46,8 @@ class ImageDetailViewController: UIViewController {
     }
     
     private func setImageFromOriginal() {
-        // Прекращаем прошлое скачивание
-        task?.cancel()
         
+        task?.cancel()
         print("original")
         // Если ссылки на оригинал нет - устанавливаем из thumbnail
         guard let original = imageInfo.original else {
@@ -76,7 +76,6 @@ class ImageDetailViewController: UIViewController {
     }
     
     private func setImageFromThumbnail() {
-        // Прекращаем прошлое скачивание
         task?.cancel()
         
         print("thumbnail")
@@ -103,7 +102,7 @@ class ImageDetailViewController: UIViewController {
         task?.resume()
     }
     
-    // MARK: - Add Gesture Recognizer
+    // MARK: - Add Gesture Recognizers
     private func addTapGestureToToggleHideToolBar() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toggleHideToolBar))
         imageView.addGestureRecognizer(tapGesture)
@@ -113,8 +112,38 @@ class ImageDetailViewController: UIViewController {
         toolBar.isHidden = !toolBar.isHidden
     }
     
+    private func addSwipeGesture() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(gesture:)))
+        swipeLeft.direction = .left
+        imageView.addGestureRecognizer(swipeLeft)
+
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(gesture:)))
+        swipeRight.direction = .right
+        imageView.addGestureRecognizer(swipeRight)
+    }
+    
+    @objc private func handleSwipe(gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .left {
+            showNextImage()
+        } else if gesture.direction == .right {
+            showPreviousImage()
+        }
+    }
+    
     // MARK: - Actions
-    @IBAction func showPreviousImage(_ sender: UIBarButtonItem) {
+    @IBAction func showPreviousImageTapped(_ sender: UIBarButtonItem) {
+        showPreviousImage()
+    }
+    
+    @IBAction func showNextImageTapped(_ sender: UIBarButtonItem) {
+        showNextImage()
+    }
+    
+    @IBAction func openLinkTapped(_ sender: UIBarButtonItem) {
+        openLink()
+    }
+    
+    private func showPreviousImage() {
         let previousImage = delegate?.previousImage(from: currIndex)
         
         if let previousImage = previousImage {
@@ -127,7 +156,7 @@ class ImageDetailViewController: UIViewController {
         }
     }
     
-    @IBAction func showNextImage(_ sender: UIBarButtonItem) {
+    private func showNextImage() {
         let nextImage = delegate?.nextImage(from: currIndex)
         
         if let nextImage = nextImage {
@@ -140,9 +169,10 @@ class ImageDetailViewController: UIViewController {
         }
     }
     
-    @IBAction func openLink(_ sender: UIBarButtonItem) {
+    private func openLink() {
         let webViewController = WebViewController()
         webViewController.link = imageInfo.link
         navigationController?.pushViewController(webViewController, animated: true)
     }
+    
 }
