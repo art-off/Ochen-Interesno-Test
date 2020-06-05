@@ -11,12 +11,14 @@ import WebKit
 
 class WebViewController: UIViewController {
     
+    // MARK: - Properties
     var link: String!
     
     private let webView = WKWebView()
     private var worningView: WrapperViewWithLabel?
     
     
+    // MARK: - Ovverides
     override func loadView() {
         view = webView
         webView.navigationDelegate = self
@@ -32,11 +34,25 @@ class WebViewController: UIViewController {
             showWorning()
         }
         
-        let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
-        toolbarItems = [refresh]
+        addToolbar()
+    }
+    
+    // MARK: - Toolbar
+    private func addToolbar() {
+        let reloadButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
+        let openInBrouserButton = UIBarButtonItem(title: "В браузере", style: .done, target: self, action: #selector(openInBrouser))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolbarItems = [reloadButton, flexibleSpace, openInBrouserButton]
         navigationController?.isToolbarHidden = false
     }
     
+    @objc private func openInBrouser() {
+        if let url = URL(string: link) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    // MARK: - Show Worning
     private func showWorning() {
         print("sdfsdf")
         worningView = WrapperViewWithLabel(text: "Не удалось открыть '\(link!)'")
@@ -45,6 +61,7 @@ class WebViewController: UIViewController {
     }
 }
 
+// MARK: - WK Navigation Delegate
 extension WebViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

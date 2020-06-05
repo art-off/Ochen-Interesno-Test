@@ -37,7 +37,20 @@ class ImageDetailViewController: UIViewController {
         setImage()
     }
     
-    // MARK: - Alert To 
+    // MARK: - Add View With Label To Search
+    private func showViewWithWorningLabel() {
+        if !view.subviews.contains(viewWithLabel) {
+            view.addSubview(viewWithLabel)
+            viewWithLabel.translatesAutoresizingMaskIntoConstraints = false
+            viewWithLabel.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
+            viewWithLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
+            viewWithLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
+            viewWithLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -2 * 8).isActive = true
+        }
+        
+        viewWithLabel.label.text = "Что-то пошло не так"
+        viewWithLabel.isHidden = false
+    }
     
     // MARK: - Show Alert
     private func showAlertView(alertView: AlertView) {
@@ -115,8 +128,7 @@ class ImageDetailViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.viewWithLabel.label.text = "Что-то пошло не так"
-                    self.viewWithLabel.isHidden = false
+                    self.showViewWithWorningLabel()
                 }
             }
         }

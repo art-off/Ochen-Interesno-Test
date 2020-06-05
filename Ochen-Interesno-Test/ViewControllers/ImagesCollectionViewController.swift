@@ -38,19 +38,21 @@ class ImagesCollectionViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        addAlertLabelToEnterText()
+        showViewWithLabelToEnterText()
     }
     
     // MARK: - View With Text To Enter Text
-    private func addAlertLabelToEnterText() {
-        viewWithLabel.label.text = "Введите посковый запрос"
-        view.addSubview(viewWithLabel)
+    private func showViewWithLabelToEnterText() {
+        if !view.subviews.contains(viewWithLabel) {
+            view.addSubview(viewWithLabel)
+            viewWithLabel.translatesAutoresizingMaskIntoConstraints = false
+            viewWithLabel.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 2 * 8).isActive = true
+            viewWithLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            viewWithLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            viewWithLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -2 * 8).isActive = true
+        }
         
-        viewWithLabel.translatesAutoresizingMaskIntoConstraints = false
-        viewWithLabel.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 2 * 8).isActive = true
-        viewWithLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        viewWithLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        viewWithLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -2 * 8).isActive = true
+        viewWithLabel.label.text = "Введите посковый запрос"
     }
     
 }
