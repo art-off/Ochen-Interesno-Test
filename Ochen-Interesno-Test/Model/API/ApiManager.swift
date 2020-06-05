@@ -10,7 +10,7 @@ import UIKit
 
 class ApiManager {
     
-    static func loadJsonImagesTask(withSearchText searchText: String, complition: @escaping ([ImageResult]?) -> Void) -> URLSessionDataTask? {
+    static func loadJsonImagesTask(withSearchText searchText: String, searchNumber: Int, complition: @escaping ([ImageResult]?) -> Void) -> URLSessionDataTask? {
         guard var components = URLComponents(string: API.addres) else {
             complition(nil)
             return nil
@@ -20,6 +20,7 @@ class ApiManager {
             URLQueryItem(name: "tbm", value: "isch"),
             // для определения страны
             // URLQueryItem(name: "gl", value: "ru"),
+            URLQueryItem(name: "ijn", value: String(searchNumber)),
             URLQueryItem(name: "api_key", value: API.key)
         ]
         

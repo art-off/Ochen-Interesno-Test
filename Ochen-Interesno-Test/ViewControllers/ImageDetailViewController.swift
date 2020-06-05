@@ -18,10 +18,10 @@ class ImageDetailViewController: UIViewController {
     var imageInfo: ImageResult!
     var currIndex: Int!
     
-    private var task: URLSessionDataTask?
-    
-    private let alertViewNoImages = AlertView(alertText: "Больше нет изображений")
+    private let alertView = AlertView()
     private let viewWithLabel = WrapperViewWithLabel()
+    
+    private var task: URLSessionDataTask?
     
     // MARK: - Overrides
     override func viewDidLoad() {
@@ -37,8 +37,8 @@ class ImageDetailViewController: UIViewController {
         setImage()
     }
     
-    // MARK: - Add View With Label To Search
-    private func showViewWithLabel(text: String) {
+    // MARK: - Show View With Label
+    private func showViewWithLabel(withText text: String) {
         if !view.subviews.contains(viewWithLabel) {
             view.addSubview(viewWithLabel)
             viewWithLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -52,8 +52,8 @@ class ImageDetailViewController: UIViewController {
         viewWithLabel.isHidden = false
     }
     
-    // MARK: - Show Alert
-    private func showAlertView(alertView: AlertView) {
+    // MARK: - Show Alert View
+    private func showAlertView(withText text: String) {
         if !view.subviews.contains(alertView) {
             view.addSubview(alertView)
 
@@ -61,6 +61,8 @@ class ImageDetailViewController: UIViewController {
             alertView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
             alertView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
         }
+        
+        alertView.alertLabel.text = text
         
         alertView.alpha = 1.0
         alertView.isHidden = false
@@ -129,7 +131,7 @@ class ImageDetailViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.showViewWithLabel(text: "Что-то пошло не так")
+                    self.showViewWithLabel(withText: "Что-то пошло не так")
                 }
             }
         }
@@ -186,7 +188,7 @@ class ImageDetailViewController: UIViewController {
             imageView.image = nil
             setImage()
         } else {
-            showAlertView(alertView: alertViewNoImages)
+            showAlertView(withText: "Больше нет изображений")
         }
     }
     
@@ -199,7 +201,7 @@ class ImageDetailViewController: UIViewController {
             imageView.image = nil
             setImage()
         } else {
-            showAlertView(alertView: alertViewNoImages)
+            showAlertView(withText: "Загружается...")
         }
     }
     
