@@ -20,7 +20,7 @@ class ImagesCollectionViewController: UIViewController {
     // MARK: - Privates
     private var imagesResults = [ImageResult]()
     
-    private let alertToEnterText = WrapperViewWithLabel(text: "Введите поисковый запрос")
+    private let viewWithLabel = WrapperViewWithLabel()
     
     // MARK: - Ovverides
     override func viewDidLoad() {
@@ -38,14 +38,19 @@ class ImagesCollectionViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // Добавляем надпись 'Введите посковый запрос'
-        view.addSubview(alertToEnterText)
+        addAlertLabelToEnterText()
+    }
+    
+    // MARK: - View With Text To Enter Text
+    private func addAlertLabelToEnterText() {
+        viewWithLabel.label.text = "Введите посковый запрос"
+        view.addSubview(viewWithLabel)
         
-        alertToEnterText.translatesAutoresizingMaskIntoConstraints = false
-        alertToEnterText.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 2 * 8).isActive = true
-        alertToEnterText.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        alertToEnterText.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        alertToEnterText.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -2 * 8).isActive = true
+        viewWithLabel.translatesAutoresizingMaskIntoConstraints = false
+        viewWithLabel.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 2 * 8).isActive = true
+        viewWithLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        viewWithLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        viewWithLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -2 * 8).isActive = true
     }
     
 }
@@ -58,7 +63,7 @@ extension ImagesCollectionViewController: UITextFieldDelegate {
         guard !searchText.isEmpty else { return false }
         
         // Убираем надпись 'Введите поисковый запрос'
-        alertToEnterText.isHidden = true
+        viewWithLabel.isHidden = true
         
         textField.textAlignment = .center
         textField.font = UIFont.boldSystemFont(ofSize: 20)
@@ -67,8 +72,9 @@ extension ImagesCollectionViewController: UITextFieldDelegate {
         
         let task = ApiManager.loadJsonImagesTask(withSearchText: searchText) { imagesResults in
             guard let imagesResults = imagesResults else {
-                print("Нету(")
                 DispatchQueue.main.async {
+                    self.viewWithLabel.label.text = "Что-то пошло не так"
+                    self.viewWithLabel.isHidden = false
                     self.removeSpiner()
                 }
                 return
@@ -106,8 +112,10 @@ extension ImagesCollectionViewController: UICollectionViewDataSource {
         // чтобы фото не повторялись
         cell.cancelTask()
         cell.imageView.image = nil
+        
         cell.imageInfo = imagesResults[indexPath.row]
         cell.setImage()
+        
         return cell
     }
 

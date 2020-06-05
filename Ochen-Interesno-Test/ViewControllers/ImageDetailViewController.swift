@@ -21,6 +21,7 @@ class ImageDetailViewController: UIViewController {
     private var task: URLSessionDataTask?
     
     private let alertViewNoImages = AlertView(alertText: "Больше нет изображений")
+    private let viewWithLabel = WrapperViewWithLabel()
     
     // MARK: - Overrides
     override func viewDidLoad() {
@@ -35,6 +36,8 @@ class ImageDetailViewController: UIViewController {
         
         setImage()
     }
+    
+    // MARK: - Alert To 
     
     // MARK: - Show Alert
     private func showAlertView(alertView: AlertView) {
@@ -56,6 +59,8 @@ class ImageDetailViewController: UIViewController {
     private func setImage() {
         navigationItem.title = imageInfo.title
         
+        viewWithLabel.isHidden = true
+        
         // Пытаемся установить из Original,
         // Если что-то пойдет не так - оттуда вызовется setImageFromThumbnail
         setImageFromOriginal()
@@ -64,17 +69,15 @@ class ImageDetailViewController: UIViewController {
     private func setImageFromOriginal() {
         
         task?.cancel()
-        print("original")
+        
         // Если ссылки на оригинал нет - устанавливаем из thumbnail
         guard let original = imageInfo.original else {
-            print("нет original")
             setImageFromThumbnail()
             return
         }
         
         // Если есть в кэше - устанавливаем оттуда
         if let originalFromCache = ImagesManager.shared.getCachedImage(urlString: original) {
-            print("originalFromCache")
             self.imageView.image = originalFromCache
             return
         }
@@ -94,14 +97,11 @@ class ImageDetailViewController: UIViewController {
     private func setImageFromThumbnail() {
         task?.cancel()
         
-        print("thumbnail")
         guard let thumbnail = imageInfo.thumbnail else {
-            print("нет thumbnail")
             return
         }
         
         if let thumbnailFromCache = ImagesManager.shared.getCachedImage(urlString: thumbnail) {
-            print("thumbnailFromCache")
             DispatchQueue.main.async {
                 self.imageView.image = thumbnailFromCache
             }
@@ -112,6 +112,11 @@ class ImageDetailViewController: UIViewController {
             if let image = image {
                 DispatchQueue.main.async {
                     self.imageView.image = image
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.viewWithLabel.label.text = "Что-то пошло не так"
+                    self.viewWithLabel.isHidden = false
                 }
             }
         }
