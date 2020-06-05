@@ -171,6 +171,13 @@ extension ImagesCollectionViewController: UICollectionViewDataSource {
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as ! Image
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell else { return }
+        
+        cell.setImage()
+    }
 
 }
 
@@ -231,6 +238,8 @@ extension ImagesCollectionViewController {
 extension ImagesCollectionViewController: ImageDetailViewProtocol {
     func nextImage(from index: Int) -> (index: Int, info: ImageResult)? {
         guard index >= 0 && index < imagesResults.count - 1 else {
+            guard let searchText = searchText, task == nil else { return nil }
+            loadImage(searchText: searchText, searchNumber: currSearchNumber)
             return nil
         }
         

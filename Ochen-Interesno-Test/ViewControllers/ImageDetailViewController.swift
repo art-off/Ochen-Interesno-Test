@@ -76,6 +76,7 @@ class ImageDetailViewController: UIViewController {
         
         viewWithLabel.isHidden = true
         
+        task?.cancel()
         // Пытаемся установить из Original,
         // Если что-то пойдет не так - оттуда вызовется setImageFromThumbnail
         setImageFromOriginal()
@@ -185,6 +186,7 @@ class ImageDetailViewController: UIViewController {
         if let previousImage = previousImage {
             currIndex = previousImage.index
             imageInfo = previousImage.info
+            task?.cancel()
             imageView.image = nil
             setImage()
         } else {
@@ -198,6 +200,7 @@ class ImageDetailViewController: UIViewController {
         if let nextImage = nextImage {
             currIndex = nextImage.index
             imageInfo = nextImage.info
+            task?.cancel()
             imageView.image = nil
             setImage()
         } else {

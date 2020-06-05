@@ -149,8 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				4A72E0452486C38D00F0A59C /* API */,
-				4AD696722483FCC400A4A2B7 /* ImagesResponse.swift */,
 				4A72E0432486BBDD00F0A59C /* ImagesManager.swift */,
+				4AD696722483FCC400A4A2B7 /* ImagesResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
