@@ -11,9 +11,7 @@ import UIKit
 class AlertView: UIView {
     
     @IBOutlet var contentView: UIView!
-    // @IBOutlet weak var contentView: AlertView!
     
-    // @IBOutlet weak var alertLabel: UILabel!
     @IBOutlet weak var alertLabel: UILabel!
     
     

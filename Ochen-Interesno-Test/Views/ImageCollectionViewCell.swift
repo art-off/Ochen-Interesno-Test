@@ -27,6 +27,13 @@ class ImageCollectionViewCell: UICollectionViewCell {
                 imageView.image = imageFromBase64
             // Если в thumbmail не было base64 - пытаемся скачать по ссылке, которая лежит там
             } else {
+                // Если есть в кэше - берем оттуда
+                if let thumbnailFromCache = ImagesManager.shared.getCachedImage(urlString: thumbnail) {
+                    self.imageView.image = thumbnailFromCache
+                    return
+                }
+                
+                // Иначе качаем
                 task = ImagesManager.shared.loadImage(urlString: thumbnail) { image in
                     DispatchQueue.main.async {
                         self.imageView.image = image
