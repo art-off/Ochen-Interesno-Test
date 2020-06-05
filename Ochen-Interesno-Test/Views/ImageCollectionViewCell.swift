@@ -15,25 +15,35 @@ class ImageCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     var imageInfo: ImageResult!
     
-    private var task: URLSessionDataTask!
+    private var task: URLSessionDataTask?
     
     
-    // MARK: - Methods
+    // MARK: - Ovverides
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        task?.cancel()
+        imageView.image = nil
+    }
+    
+    
+    // MARK: - Set Image
     func setImage() {
-        // Если миниизображение есть (base64 или ссылка)
+        /// Если миниизображение есть (base64 или ссылка)
         if let thumbnail = imageInfo.thumbnail {
-            // Если в thumbmail был base64, то устанавливаем image
+            /// Если в thumbmail был base64, то устанавливаем image
             if let imageFromBase64 = UIImage.fromBase64(base64: thumbnail) {
                 imageView.image = imageFromBase64
-            // Если в thumbmail не было base64 - пытаемся скачать по ссылке, которая лежит там
+                
+            /// Если в thumbmail не было base64 - пытаемся скачать по ссылке, которая лежит там
             } else {
-                // Если есть в кэше - берем оттуда
+                /// Если есть в кэше - берем оттуда
                 if let thumbnailFromCache = ImagesManager.shared.getCachedImage(urlString: thumbnail) {
                     self.imageView.image = thumbnailFromCache
                     return
                 }
                 
-                // Иначе качаем
+                /// Иначе качаем
                 task = ImagesManager.shared.loadImage(urlString: thumbnail) { image in
                     DispatchQueue.main.async {
                         self.imageView.image = image
@@ -41,8 +51,16 @@ class ImageCollectionViewCell: UICollectionViewCell {
                 }
                 task?.resume()
             }
-        // Если соовсем нет thumbmail - загружаем в качетсве мини-изображения original
+            
+        /// Если соовсем нет thumbmail - загружаем в качетсве мини-изображения original
         } else if let original = imageInfo.original {
+            /// Если есть в кэше - берем оттуда
+            if let originalFromCache = ImagesManager.shared.getCachedImage(urlString: original) {
+                self.imageView.image = originalFromCache
+                return
+            }
+            
+            /// Иначе качаем
             task = ImagesManager.shared.loadImage(urlString: original) { image in
                 DispatchQueue.main.async {
                     self.imageView.image = image
@@ -50,10 +68,6 @@ class ImageCollectionViewCell: UICollectionViewCell {
             }
             task?.resume()
         }
-    }
-    
-    func cancelTask() {
-        task?.cancel()
     }
     
 }

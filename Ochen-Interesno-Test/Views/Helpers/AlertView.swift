@@ -62,7 +62,7 @@ class AlertView: UIView {
     // MARK: - Скрытие view с анимацией
     func hideWithAnimation() {
         UIView.animate(
-            withDuration: 3.0,
+            withDuration: 2.0,
             animations: {
                 self.alpha = 0.0
             },

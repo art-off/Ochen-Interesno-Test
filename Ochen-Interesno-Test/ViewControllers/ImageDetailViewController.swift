@@ -18,10 +18,10 @@ class ImageDetailViewController: UIViewController {
     var imageInfo: ImageResult!
     var currIndex: Int!
     
-    private var task: URLSessionDataTask?
-    
-    private let alertViewNoImages = AlertView(alertText: "Больше нет изображений")
+    private let alertView = AlertView()
     private let viewWithLabel = WrapperViewWithLabel()
+    
+    private var task: URLSessionDataTask?
     
     // MARK: - Overrides
     override func viewDidLoad() {
@@ -37,8 +37,8 @@ class ImageDetailViewController: UIViewController {
         setImage()
     }
     
-    // MARK: - Add View With Label To Search
-    private func showViewWithWorningLabel() {
+    // MARK: - Show View With Label
+    private func showViewWithLabel(withText text: String) {
         if !view.subviews.contains(viewWithLabel) {
             view.addSubview(viewWithLabel)
             viewWithLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -48,12 +48,12 @@ class ImageDetailViewController: UIViewController {
             viewWithLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -6 * 8).isActive = true
         }
         
-        viewWithLabel.label.text = "Что-то пошло не так"
+        viewWithLabel.label.text = text
         viewWithLabel.isHidden = false
     }
     
-    // MARK: - Show Alert
-    private func showAlertView(alertView: AlertView) {
+    // MARK: - Show Alert View
+    private func showAlertView(withText text: String) {
         if !view.subviews.contains(alertView) {
             view.addSubview(alertView)
 
@@ -61,6 +61,8 @@ class ImageDetailViewController: UIViewController {
             alertView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
             alertView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
         }
+        
+        alertView.alertLabel.text = text
         
         alertView.alpha = 1.0
         alertView.isHidden = false
@@ -74,13 +76,14 @@ class ImageDetailViewController: UIViewController {
         
         viewWithLabel.isHidden = true
         
+        task?.cancel()
         // Пытаемся установить из Original,
         // Если что-то пойдет не так - оттуда вызовется setImageFromThumbnail
         setImageFromOriginal()
     }
     
     private func setImageFromOriginal() {
-        
+        // Прекращаем прошлое скачивание
         task?.cancel()
         
         // Если ссылки на оригинал нет - устанавливаем из thumbnail
@@ -108,6 +111,7 @@ class ImageDetailViewController: UIViewController {
     }
     
     private func setImageFromThumbnail() {
+        // Прекращаем прошлое скачивание
         task?.cancel()
         
         guard let thumbnail = imageInfo.thumbnail else {
@@ -128,7 +132,7 @@ class ImageDetailViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.showViewWithWorningLabel()
+                    self.showViewWithLabel(withText: "Что-то пошло не так")
                 }
             }
         }
@@ -182,10 +186,11 @@ class ImageDetailViewController: UIViewController {
         if let previousImage = previousImage {
             currIndex = previousImage.index
             imageInfo = previousImage.info
+            task?.cancel()
             imageView.image = nil
             setImage()
         } else {
-            showAlertView(alertView: alertViewNoImages)
+            showAlertView(withText: "Больше нет изображений")
         }
     }
     
@@ -195,10 +200,11 @@ class ImageDetailViewController: UIViewController {
         if let nextImage = nextImage {
             currIndex = nextImage.index
             imageInfo = nextImage.info
+            task?.cancel()
             imageView.image = nil
             setImage()
         } else {
-            showAlertView(alertView: alertViewNoImages)
+            showAlertView(withText: "Загружается...")
         }
     }
     

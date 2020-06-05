@@ -149,8 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				4A72E0452486C38D00F0A59C /* API */,
-				4AD696722483FCC400A4A2B7 /* ImagesResponse.swift */,
 				4A72E0432486BBDD00F0A59C /* ImagesManager.swift */,
+				4AD696722483FCC400A4A2B7 /* ImagesResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -167,8 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				4A72E040248672AF00F0A59C /* Extensions */,
-				4AD6967C2485556600A4A2B7 /* ImageCollectionViewCell.swift */,
 				4A67CB83248A49C700F1D1FA /* Helpers */,
+				4AD6967C2485556600A4A2B7 /* ImageCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

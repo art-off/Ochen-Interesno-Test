@@ -17,10 +17,18 @@ class ImagesCollectionViewController: UIViewController {
     private let sectionInsets = UIEdgeInsets(top: 20.0, left: 12.0, bottom: 20.0, right: 12.0)
     private let itemsPerRow: CGFloat = 3
     
+    // Номер страницы со страницами (api возвращает по 100 изображений)
+    private var currSearchNumber = 0
+    private var searchText: String?
+    
     // MARK: - Privates
     private var imagesResults = [ImageResult]()
     
     private let viewWithLabel = WrapperViewWithLabel()
+    private let alertView = AlertView()
+    
+    private var task: URLSessionDataTask?
+    
     
     // MARK: - Ovverides
     override func viewDidLoad() {
@@ -35,14 +43,18 @@ class ImagesCollectionViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        showViewWithLabel(text: "Введите поисковый запрос")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        showViewWithLabelToEnterText()
-    }
+}
+
+
+// MARK: - Helpers View
+extension ImagesCollectionViewController {
     
-    // MARK: - View With Text To Enter Text
-    private func showViewWithLabelToEnterText() {
+    // MARK: Show View With Label
+    private func showViewWithLabel(text: String) {
         if !view.subviews.contains(viewWithLabel) {
             view.addSubview(viewWithLabel)
             viewWithLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -52,17 +64,75 @@ class ImagesCollectionViewController: UIViewController {
             viewWithLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -2 * 8).isActive = true
         }
         
-        viewWithLabel.label.text = "Введите посковый запрос"
+        viewWithLabel.label.text = text
+        viewWithLabel.isHidden = false
+    }
+    
+    // MARK: Show Alert View
+    private func showAlertView(withText text: String) {
+        if !view.subviews.contains(alertView) {
+            view.addSubview(alertView)
+            
+            alertView.translatesAutoresizingMaskIntoConstraints = false
+            alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            alertView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        }
+           
+        alertView.alertLabel.text = text
+           
+        alertView.alpha = 1.0
+        alertView.isHidden = false
+           
+        alertView.hideWithAnimation()
     }
     
 }
+
+
+// MARK: - Load Images
+extension ImagesCollectionViewController {
+    
+    private func loadImage(searchText: String, searchNumber: Int) {
+        task = ApiManager.loadJsonImagesTask(withSearchText: searchText, searchNumber: searchNumber) { imagesResults in
+            guard let imagesResults = imagesResults else {
+                DispatchQueue.main.async {
+                    if self.currSearchNumber == 0 {
+                        self.showViewWithLabel(text: "Что-то пошло не так")
+                        self.task = nil
+                    }
+                    self.removeSpiner()
+                }
+                return
+            }
+            
+            if self.currSearchNumber == 0 {
+                self.imagesResults = imagesResults
+            } else {
+                self.imagesResults += imagesResults
+            }
+            
+            DispatchQueue.main.async {
+                self.removeSpiner()
+                self.collectionView.reloadData()
+                self.currSearchNumber += 1
+                self.task = nil
+            }
+        }
+        task?.resume()
+    }
+    
+}
+
 
 // MARK: - Text Field Delegate
 extension ImagesCollectionViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let searchText = textField.text else { return false }
-        guard !searchText.isEmpty else { return false }
+        guard let text = textField.text else { return false }
+        guard !text.isEmpty else { return false }
+        
+        searchText = text
+        currSearchNumber = 0
         
         // Убираем надпись 'Введите поисковый запрос'
         viewWithLabel.isHidden = true
@@ -72,24 +142,7 @@ extension ImagesCollectionViewController: UITextFieldDelegate {
         showSpiner()
         view.endEditing(true)
         
-        let task = ApiManager.loadJsonImagesTask(withSearchText: searchText) { imagesResults in
-            guard let imagesResults = imagesResults else {
-                DispatchQueue.main.async {
-                    self.viewWithLabel.label.text = "Что-то пошло не так"
-                    self.viewWithLabel.isHidden = false
-                    self.removeSpiner()
-                }
-                return
-            }
-            
-            self.imagesResults = imagesResults
-            
-            DispatchQueue.main.async {
-                self.removeSpiner()
-                self.collectionView.reloadData()
-            }
-        }
-        task?.resume()
+        loadImage(searchText: searchText!, searchNumber: currSearchNumber)
         
         return true
     }
@@ -102,6 +155,7 @@ extension ImagesCollectionViewController: UITextFieldDelegate {
     
 }
 
+
 // MARK: - Collection View Data Source
 extension ImagesCollectionViewController: UICollectionViewDataSource {
 
@@ -111,17 +165,22 @@ extension ImagesCollectionViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImageCollectionViewCell
-        // чтобы фото не повторялись
-        cell.cancelTask()
-        cell.imageView.image = nil
         
         cell.imageInfo = imagesResults[indexPath.row]
         cell.setImage()
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as ! Image
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell else { return }
+        
+        cell.setImage()
+    }
 
 }
+
 
 // MARK: - Collection View Delegate
 extension ImagesCollectionViewController: UICollectionViewDelegate {
@@ -136,6 +195,7 @@ extension ImagesCollectionViewController: UICollectionViewDelegate {
     }
 
 }
+
 
 // MARK: - Collection View Delegate Flow Layout
 extension ImagesCollectionViewController: UICollectionViewDelegateFlowLayout {
@@ -158,9 +218,28 @@ extension ImagesCollectionViewController: UICollectionViewDelegateFlowLayout {
 
 }
 
+
+// MARK: - Scroll View Delegate
+extension ImagesCollectionViewController {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Когда долистываю до низа - докачиваем следующие 100 картинок
+        if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height - 200)) {
+            guard let searchText = searchText, task == nil else { return }
+
+            loadImage(searchText: searchText, searchNumber: currSearchNumber)
+        }
+    }
+    
+}
+
+
+// MARK: - Image Detail View Protocol
 extension ImagesCollectionViewController: ImageDetailViewProtocol {
     func nextImage(from index: Int) -> (index: Int, info: ImageResult)? {
         guard index >= 0 && index < imagesResults.count - 1 else {
+            guard let searchText = searchText, task == nil else { return nil }
+            loadImage(searchText: searchText, searchNumber: currSearchNumber)
             return nil
         }
         
