@@ -20,6 +20,8 @@ class ImageDetailViewController: UIViewController {
     
     private var task: URLSessionDataTask?
     
+    private let alertViewNoImages = AlertView(alertText: "Больше нет изображений")
+    
     // MARK: - Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +34,22 @@ class ImageDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         
         setImage()
+    }
+    
+    // MARK: - Show Alert
+    private func showAlertView(alertView: AlertView) {
+        if !view.subviews.contains(alertView) {
+            view.addSubview(alertView)
+
+            alertView.translatesAutoresizingMaskIntoConstraints = false
+            alertView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
+            alertView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
+        }
         
-        navigationController?.setToolbarHidden(true, animated: true)
+        alertView.alpha = 1.0
+        alertView.isHidden = false
+        
+        alertView.hideWithAnimation()
     }
     
     // MARK: - Set Image
@@ -152,7 +168,7 @@ class ImageDetailViewController: UIViewController {
             imageView.image = nil
             setImage()
         } else {
-            print("Нету больше")
+            showAlertView(alertView: alertViewNoImages)
         }
     }
     
@@ -165,7 +181,7 @@ class ImageDetailViewController: UIViewController {
             imageView.image = nil
             setImage()
         } else {
-            print("Нету больше")
+            showAlertView(alertView: alertViewNoImages)
         }
     }
     
