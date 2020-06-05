@@ -38,7 +38,7 @@ class ImageDetailViewController: UIViewController {
     }
     
     // MARK: - Add View With Label To Search
-    private func showViewWithWorningLabel() {
+    private func showViewWithLabel(text: String) {
         if !view.subviews.contains(viewWithLabel) {
             view.addSubview(viewWithLabel)
             viewWithLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +48,7 @@ class ImageDetailViewController: UIViewController {
             viewWithLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -6 * 8).isActive = true
         }
         
-        viewWithLabel.label.text = "Что-то пошло не так"
+        viewWithLabel.label.text = text
         viewWithLabel.isHidden = false
     }
     
@@ -80,7 +80,7 @@ class ImageDetailViewController: UIViewController {
     }
     
     private func setImageFromOriginal() {
-        
+        // Прекращаем прошлое скачивание
         task?.cancel()
         
         // Если ссылки на оригинал нет - устанавливаем из thumbnail
@@ -108,6 +108,7 @@ class ImageDetailViewController: UIViewController {
     }
     
     private func setImageFromThumbnail() {
+        // Прекращаем прошлое скачивание
         task?.cancel()
         
         guard let thumbnail = imageInfo.thumbnail else {
@@ -128,7 +129,7 @@ class ImageDetailViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.showViewWithWorningLabel()
+                    self.showViewWithLabel(text: "Что-то пошло не так")
                 }
             }
         }

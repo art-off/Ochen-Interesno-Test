@@ -35,14 +35,13 @@ class ImagesCollectionViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        showViewWithLabel(text: "Введите поисковый запрос")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        showViewWithLabelToEnterText()
-    }
     
     // MARK: - View With Text To Enter Text
-    private func showViewWithLabelToEnterText() {
+    private func showViewWithLabel(text: String) {
         if !view.subviews.contains(viewWithLabel) {
             view.addSubview(viewWithLabel)
             viewWithLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +51,8 @@ class ImagesCollectionViewController: UIViewController {
             viewWithLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -2 * 8).isActive = true
         }
         
-        viewWithLabel.label.text = "Введите посковый запрос"
+        viewWithLabel.label.text = text
+        viewWithLabel.isHidden = false
     }
     
 }
@@ -75,8 +75,7 @@ extension ImagesCollectionViewController: UITextFieldDelegate {
         let task = ApiManager.loadJsonImagesTask(withSearchText: searchText) { imagesResults in
             guard let imagesResults = imagesResults else {
                 DispatchQueue.main.async {
-                    self.viewWithLabel.label.text = "Что-то пошло не так"
-                    self.viewWithLabel.isHidden = false
+                    self.showViewWithLabel(text: "Что-то пошло не так")
                     self.removeSpiner()
                 }
                 return
@@ -111,9 +110,6 @@ extension ImagesCollectionViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImageCollectionViewCell
-        // чтобы фото не повторялись
-        cell.cancelTask()
-        cell.imageView.image = nil
         
         cell.imageInfo = imagesResults[indexPath.row]
         cell.setImage()
@@ -158,6 +154,7 @@ extension ImagesCollectionViewController: UICollectionViewDelegateFlowLayout {
 
 }
 
+// MARK: - Image Detail View Protocol
 extension ImagesCollectionViewController: ImageDetailViewProtocol {
     func nextImage(from index: Int) -> (index: Int, info: ImageResult)? {
         guard index >= 0 && index < imagesResults.count - 1 else {
