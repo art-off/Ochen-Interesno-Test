@@ -15,7 +15,7 @@ extension ImagesCollectionViewController {
             guard let imagesResults = imagesResults else {
                 DispatchQueue.main.async {
                     if self.currSearchNumber == 0 {
-                        self.showViewWithLabel(text: "Что-то пошло не так")
+                        self.showViewWithLabel(withText: "Что-то пошло не так")
                         self.task = nil
                     }
                     self.removeSpiner()

@@ -47,7 +47,7 @@ class ImagesCollectionViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        showViewWithLabel(text: "Введите поисковый запрос")
+        showViewWithLabel(withText: "Введите поисковый запрос")
     }
     
 }

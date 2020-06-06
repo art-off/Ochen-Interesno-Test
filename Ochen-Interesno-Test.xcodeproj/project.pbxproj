@@ -18,6 +18,9 @@
 		4A67CB94248AE9E000F1D1FA /* ImagesCollectionViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CB93248AE9E000F1D1FA /* ImagesCollectionViewController+UI.swift */; };
 		4A67CB96248AEAA000F1D1FA /* ImagesCollectionViewController+LoadImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CB95248AEAA000F1D1FA /* ImagesCollectionViewController+LoadImages.swift */; };
 		4A67CB98248AEAFD00F1D1FA /* ImagesCollectionViewController+ScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CB97248AEAFD00F1D1FA /* ImagesCollectionViewController+ScrollViewDelegate.swift */; };
+		4A67CB9C248B898700F1D1FA /* ImageDetailViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CB9B248B898700F1D1FA /* ImageDetailViewController+UI.swift */; };
+		4A67CB9E248B8A2700F1D1FA /* ImageDetailViewController+SetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CB9D248B8A2700F1D1FA /* ImageDetailViewController+SetImage.swift */; };
+		4A67CBA0248B8ACE00F1D1FA /* ImageDetailViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67CB9F248B8ACE00F1D1FA /* ImageDetailViewController+Actions.swift */; };
 		4A72E03F248672A100F0A59C /* UIImage+base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A72E03E248672A100F0A59C /* UIImage+base64.swift */; };
 		4A72E0442486BBDD00F0A59C /* ImagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A72E0432486BBDD00F0A59C /* ImagesManager.swift */; };
 		4A72E0512487787000F0A59C /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A72E04F2487787000F0A59C /* ImageDetailViewController.swift */; };
@@ -49,6 +52,9 @@
 		4A67CB93248AE9E000F1D1FA /* ImagesCollectionViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagesCollectionViewController+UI.swift"; sourceTree = "<group>"; };
 		4A67CB95248AEAA000F1D1FA /* ImagesCollectionViewController+LoadImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagesCollectionViewController+LoadImages.swift"; sourceTree = "<group>"; };
 		4A67CB97248AEAFD00F1D1FA /* ImagesCollectionViewController+ScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagesCollectionViewController+ScrollViewDelegate.swift"; sourceTree = "<group>"; };
+		4A67CB9B248B898700F1D1FA /* ImageDetailViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageDetailViewController+UI.swift"; sourceTree = "<group>"; };
+		4A67CB9D248B8A2700F1D1FA /* ImageDetailViewController+SetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageDetailViewController+SetImage.swift"; sourceTree = "<group>"; };
+		4A67CB9F248B8ACE00F1D1FA /* ImageDetailViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageDetailViewController+Actions.swift"; sourceTree = "<group>"; };
 		4A72E03E248672A100F0A59C /* UIImage+base64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+base64.swift"; sourceTree = "<group>"; };
 		4A72E0432486BBDD00F0A59C /* ImagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesManager.swift; sourceTree = "<group>"; };
 		4A72E04F2487787000F0A59C /* ImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +113,18 @@
 			path = ImagesCollection;
 			sourceTree = "<group>";
 		};
+		4A67CB9A248B891A00F1D1FA /* ImagesDetail */ = {
+			isa = PBXGroup;
+			children = (
+				4A72E04F2487787000F0A59C /* ImageDetailViewController.swift */,
+				4A67CB9B248B898700F1D1FA /* ImageDetailViewController+UI.swift */,
+				4A67CB9D248B8A2700F1D1FA /* ImageDetailViewController+SetImage.swift */,
+				4A67CB9F248B8ACE00F1D1FA /* ImageDetailViewController+Actions.swift */,
+				4A72E0502487787000F0A59C /* ImageDetailViewController.xib */,
+			);
+			path = ImagesDetail;
+			sourceTree = "<group>";
+		};
 		4A72E040248672AF00F0A59C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,8 +148,7 @@
 				4A72E0582487C3FC00F0A59C /* Protocols */,
 				4AD696762485386C00A4A2B7 /* Extensions */,
 				4A67CB88248AE52600F1D1FA /* ImagesCollection */,
-				4A72E04F2487787000F0A59C /* ImageDetailViewController.swift */,
-				4A72E0502487787000F0A59C /* ImageDetailViewController.xib */,
+				4A67CB9A248B891A00F1D1FA /* ImagesDetail */,
 				4A72E05C2487F93700F0A59C /* WebView.swift */,
 			);
 			path = ViewControllers;
@@ -289,10 +306,13 @@
 				4A72E05D2487F93700F0A59C /* WebView.swift in Sources */,
 				4AD696572483F93A00A4A2B7 /* AppDelegate.swift in Sources */,
 				4A67CB96248AEAA000F1D1FA /* ImagesCollectionViewController+LoadImages.swift in Sources */,
+				4A67CB9E248B8A2700F1D1FA /* ImageDetailViewController+SetImage.swift in Sources */,
 				4A67CB98248AEAFD00F1D1FA /* ImagesCollectionViewController+ScrollViewDelegate.swift in Sources */,
 				4A72E0512487787000F0A59C /* ImageDetailViewController.swift in Sources */,
 				4A67CB8E248AE69B00F1D1FA /* ImagesCollectionViewController+FlowLayout.swift in Sources */,
+				4A67CBA0248B8ACE00F1D1FA /* ImageDetailViewController+Actions.swift in Sources */,
 				4A67CB94248AE9E000F1D1FA /* ImagesCollectionViewController+UI.swift in Sources */,
+				4A67CB9C248B898700F1D1FA /* ImageDetailViewController+UI.swift in Sources */,
 				4A72E05A2487C41100F0A59C /* ImageDetailViewDelegate.swift in Sources */,
 				4AD696712483FCB200A4A2B7 /* API.swift in Sources */,
 				4A67CB92248AE92600F1D1FA /* ImagesCollectionViewController+ImageDetailViewProtocol.swift in Sources */,
